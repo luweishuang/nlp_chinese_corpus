@@ -22,3 +22,23 @@ for input_path in file_paths:
             json_string = json.loads(line.strip())
             text = json_string.get('text', '')
             line_list = text.split()
+
+'''
+# ------------------ wiki_zh_2019 ----------------------
+            text = json_string.get('text', '')
+            line_list = text.split()
+            all_text_list.extend(line_list)
+
+# --------------- webtext2019zh  new2016zh --------------------
+            all_text_list.append(json_string.get('title', ''))
+            all_text_list.append(json_string.get('desc', ''))
+            line_list = json_string.get('content', '').split()
+            all_text_list.extend(line_list)
+            
+# ------------------ translation2019zh --------------------
+            all_text_list.append(json_string.get('chinese', ''))
+
+# ------------------ baike2018qa --------------------
+            all_text_list.append(json_string.get('title', ''))
+            all_text_list.append(json_string.get('answer', ''))
+'''
