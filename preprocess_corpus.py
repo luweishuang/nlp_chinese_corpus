@@ -15,9 +15,9 @@ for sub_folder in os.listdir(base_dir):
             
 base_dir = "/path_to_txt/*/*"
 file_paths = sorted(glob.glob(base_dir))
+all_text_list = []
 for input_path in file_paths:
     print("Processing %s", input_path)
-    all_text_list = []
     with open(input_path, 'r', encoding='utf8') as file:
         for line in file:
             json_string = json.loads(line.strip())
@@ -25,10 +25,10 @@ for input_path in file_paths:
             cur_string = "。".join(text.split())
             all_text_list.append(cur_string)
 
-    save_txt = os.path.dirname(input_path) + ".txt"
-    with open(save_txt, "w") as fw:
-        for cur_line in all_text_list:
-            fw.write(cur_line + "\n")
+save_txt = os.path.dirname(base_dir) + ".txt"
+with open(save_txt, "w") as fw:
+    for cur_line in all_text_list:
+        fw.write(cur_line + "\n")
 
 '''
 # ------------------ wiki_zh_2019 ----------------------
