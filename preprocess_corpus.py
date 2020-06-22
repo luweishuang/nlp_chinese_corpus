@@ -16,12 +16,18 @@ for sub_folder in os.listdir(base_dir):
 base_dir = "/path_to_txt/*/*"
 file_paths = sorted(glob.glob(base_dir))
 for input_path in file_paths:
+    all_text_list = []
     print("Processing %s", input_path)
     with open(input_path, 'r', encoding='utf8') as file:
         for line in file:
             json_string = json.loads(line.strip())
             text = json_string.get('text', '')
             line_list = text.split()
+            
+    save_txt = input_path.replace(".json", ".txt")
+    with open(save_txt, "w") as fw:
+        for cur_line in all_text_list:
+            fw.write(cur_line + "\n")
 
 '''
 # ------------------ wiki_zh_2019 ----------------------
