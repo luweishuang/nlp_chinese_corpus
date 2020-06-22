@@ -16,15 +16,16 @@ for sub_folder in os.listdir(base_dir):
 base_dir = "/path_to_txt/*/*"
 file_paths = sorted(glob.glob(base_dir))
 for input_path in file_paths:
-    all_text_list = []
     print("Processing %s", input_path)
+    all_text_list = []
     with open(input_path, 'r', encoding='utf8') as file:
         for line in file:
             json_string = json.loads(line.strip())
             text = json_string.get('text', '')
-            line_list = text.split()
-            
-    save_txt = input_path.replace(".json", ".txt")
+            cur_string = "。".join(text.split())
+            all_text_list.append(cur_string)
+
+    save_txt = os.path.dirname(input_path) + ".txt"
     with open(save_txt, "w") as fw:
         for cur_line in all_text_list:
             fw.write(cur_line + "\n")
@@ -32,8 +33,10 @@ for input_path in file_paths:
 '''
 # ------------------ wiki_zh_2019 ----------------------
             text = json_string.get('text', '')
-            line_list = text.split()
-            all_text_list.extend(line_list)
+            # line_list = text.split()
+            # all_text_list.extend(line_list)
+            cur_string = "。".join(text.split())
+            all_text_list.append(cur_string)
 
 # --------------- webtext2019zh  new2016zh --------------------
             all_text_list.append(json_string.get('title', ''))
@@ -45,6 +48,8 @@ for input_path in file_paths:
             all_text_list.append(json_string.get('chinese', ''))
 
 # ------------------ baike2018qa --------------------
-            all_text_list.append(json_string.get('title', ''))
-            all_text_list.append(json_string.get('answer', ''))
+            l1 = ",".join(json_string.get('title', '').split())
+            l2 = ",".join(json_string.get('answer', '').split())
+            cur_string = l1 + ". " + l2
+            all_text_list.append(cur_string)
 '''
